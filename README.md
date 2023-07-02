@@ -1,5 +1,5 @@
 <img src="Images/ReadMeBanner.png" alt="Monogame.ImGuiNet_Logo" width="100%">
-!\[my badge\](https://badgen.net/badge/hello/world/red?icon=twitter)
+!\[Stars\](https://badgen.net/github/stars/mezo-hx/Monogame.ImGuiNet)
 
 # Monogame.ImGuiNet
 Monogame.ImGuiNet is a wrapper for ImGui.Net specifically designed for use with Monogame.
