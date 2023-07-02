@@ -1,5 +1,5 @@
 <img src="Images/ReadMeBanner.png" alt="Monogame.ImGuiNet_Logo" width="100%">
-[![Build Status](https://img.shields.io/github/forks/https://github.com/Mezo-hx/Monogame.ImGuiNet.svg?style=flat-square)](https://github.com/https://github.com/Mezo-hx/Monogame.ImGuiNet)
+<img src="https://img.shields.io/badge/s-Label-brightgreen?style=style=for-the-badg">
 
 # Monogame.ImGuiNet
 Monogame.ImGuiNet is a wrapper for ImGui.Net specifically designed for use with Monogame.
