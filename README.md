@@ -1,5 +1,4 @@
 <img src="Images/ReadMeBanner.png" alt="Monogame.ImGuiNet_Logo" width="100%">
-!\[Stars\](https://badgen.net/github/stars/mezo-hx/Monogame.ImGuiNet)
 
 # Monogame.ImGuiNet
 Monogame.ImGuiNet is a wrapper for ImGui.Net specifically designed for use with Monogame.
