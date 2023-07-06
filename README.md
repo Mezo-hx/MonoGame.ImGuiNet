@@ -32,11 +32,11 @@ protected override void Draw(GameTime gameTime)
 {
     // ...
     
-    GuiRenderer.BeginLayout(gameTime);
+   _imGuiRenderer.BeforeLayout(gameTime);
 
-    // ImGui Code
+   ImGui.Text("Works!");
 
-    GuiRenderer.EndLayout();
+   _imGuiRenderer.AfterLayout();
 
     // ...
 }
