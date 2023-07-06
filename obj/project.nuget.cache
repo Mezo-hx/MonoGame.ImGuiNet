@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "thmKDvS4yoLgDNL8dlowumJ4BZK9BTPbIFWb9ijMzoO5xrsj5jUc/PLm3kUeieN3j8FX2URE6Hnct805bjdcXQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mezo\\.nuget\\packages\\imgui.net\\1.89.7.1\\imgui.net.1.89.7.1.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.18\\microsoft.windowsdesktop.app.ref.6.0.18.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.18\\microsoft.netcore.app.ref.6.0.18.nupkg.sha512",
+    "C:\\Users\\Mezo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.18\\microsoft.aspnetcore.app.ref.6.0.18.nupkg.sha512"
+  ],
+  "logs": []
+}
