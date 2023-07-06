@@ -1,6 +1,6 @@
 <img src="Images/ReadMeBanner.png" alt="Monogame.ImGuiNet_Logo" width="100%">
 
-# Monogame.ImGuiNet
+# MonoGame.ImGuiNet
 MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components designed for MonoGame.
 
 # Getting Started
