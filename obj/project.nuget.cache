@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "thmKDvS4yoLgDNL8dlowumJ4BZK9BTPbIFWb9ijMzoO5xrsj5jUc/PLm3kUeieN3j8FX2URE6Hnct805bjdcXQ==",
+  "dgSpecHash": "h5Joo/WfAip4kfOHjv9fAy7Hio9AIE/c+s3Ind+EJss2SUp70q1hAPLEKsnmd5Heyjr7MIQ8O/13Hh9PekZdSA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+  "projectFilePath": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mezo\\.nuget\\packages\\imgui.net\\1.89.7.1\\imgui.net.1.89.7.1.nupkg.sha512",
     "C:\\Users\\Mezo\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",

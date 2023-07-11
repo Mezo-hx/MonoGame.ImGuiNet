@@ -1,30 +1,29 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ImGuiNET;
 
-namespace MonoGame.ImGuiNet
+namespace MonoGame.ImGuiNet;
+
+public static class DrawVertDeclaration
 {
-    public static class DrawVertDeclaration
+    public static readonly VertexDeclaration Declaration;
+
+    public static readonly int Size;
+
+    static DrawVertDeclaration()
     {
-        public static readonly VertexDeclaration Declaration;
+        unsafe { Size = sizeof(ImDrawVert); }
 
-        public static readonly int Size;
+        Declaration = new VertexDeclaration(
+            Size,
 
-        static DrawVertDeclaration()
-        {
-            unsafe { Size = sizeof(ImDrawVert); }
+            // Position
+            new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
 
-            Declaration = new VertexDeclaration(
-                Size,
+            // UV
+            new VertexElement(8, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0),
 
-                // Position
-                new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
-
-                // UV
-                new VertexElement(8, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0),
-
-                // Color
-                new VertexElement(16, VertexElementFormat.Color, VertexElementUsage.Color, 0)
-            );
-        }
+            // Color
+            new VertexElement(16, VertexElementFormat.Color, VertexElementUsage.Color, 0)
+        );
     }
 }

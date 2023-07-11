@@ -12,7 +12,7 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Abslute Chaos")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright (c) 2023 Mezo")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("\r\n\t\t\tA superset of ImGuiNet with additional components designed for Monogame\r\n\t\t")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\Monogame.ImGuiNet.csproj": {}
+    "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\Monogame.ImGuiNet.csproj": {
+    "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\Monogame.ImGuiNet.csproj",
-        "projectName": "Monogame.ImGuiNet",
-        "projectPath": "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+        "projectUniqueName": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+        "projectName": "MonoGame.ImGuiNet",
+        "projectPath": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
         "packagesPath": "C:\\Users\\Mezo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mezo\\Documents\\GitHub\\Monogame.ImGuiNet\\obj\\",
+        "outputPath": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\Mezo\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
@@ -29,6 +29,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
