@@ -5,7 +5,7 @@ MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components (gonna re
 
 # Getting Started
 
-Visit the documentation page on how to the started
+Updating...
 
 # Notable Mentions
 
