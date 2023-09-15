@@ -5,7 +5,9 @@ MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components (gonna re
 
 # Getting Started
 
-Updating...
+To install, you'll need to set `MonoGame.ImGuiNet` as the project reference for your main `.sln` file.
+An issue was opened regarding an issue with the nuget package, so I wanted to explain that the nuget package will be out-of-date.
+And I also explained in the issue on how t oadd it as a project reference, https://github.com/Mezo-hx/MonoGame.ImGuiNet/issues/1
 
 # Notable Mentions
 
