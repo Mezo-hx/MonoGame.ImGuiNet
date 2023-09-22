@@ -12,3 +12,5 @@ And I also explained in the issue on how t oadd it as a project reference, https
 # Notable Mentions
 
 [Dovker](https://github.com/dovker) - For the original [Monogame.ImGui](https://github.com/dovker/Monogame.ImGui)
+
+## Updates will resume soon!
