@@ -17,3 +17,6 @@ MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components (gonna re
 # Changelog
 
 > Soon!
+
+# Contributors
+[contributors-image]: https://contrib.rocks/image?repo=Mezo-hx/MonoGame.ImGuiNet
