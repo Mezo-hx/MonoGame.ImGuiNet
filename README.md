@@ -6,6 +6,7 @@ MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components (gonna re
 # Getting Started
 
 > Project Reference: [check out this issue for a small tutorial](https://github.com/Mezo-hx/MonoGame.ImGuiNet/issues/1)
+
 > Wiki: https://github.com/Mezo-hx/MonoGame.ImGuiNet/wiki/Getting-Started
 
 # Notable Mentions
