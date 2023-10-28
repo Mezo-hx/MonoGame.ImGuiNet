@@ -1,16 +1,28 @@
 <img src="Images/ReadMeBanner.png" alt="Monogame.ImGuiNet_Logo" width="100%">
 
 # MonoGame.ImGuiNet
+
 MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components (gonna release the components soon) designed for MonoGame.
+> Full credit goes to ImGuiNet.
 
 # Getting Started
 
-To install, you'll need to set `MonoGame.ImGuiNet` as the project reference for your main `.sln` file.
-An issue was opened regarding an issue with the nuget package, so I wanted to explain that the nuget package will be out-of-date.
-And I also explained in the issue on how t oadd it as a project reference, https://github.com/Mezo-hx/MonoGame.ImGuiNet/issues/1
+> Installation: https://github.com/Mezo-hx/MonoGame.ImGuiNet/issues/1
+
+> Wiki: https://github.com/Mezo-hx/MonoGame.ImGuiNet/wiki
+
 
 # Notable Mentions
 
 [Dovker](https://github.com/dovker) - For the original [Monogame.ImGui](https://github.com/dovker/Monogame.ImGui)
 
-## Updates will resume soon!
+# Changelog
+
+Update 0.1:
+  - Changed `BeforeLayout` and `AfterLayout` to `BeginLayout` and `EndLayout`
+  - Fixed the lag issue when holding Shift or CTRL on the ImGui Window
+
+# Contributors
+<a href="https://github.com/Mezo-hx/MonoGame.ImGuiNet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Mezo-hx/MonoGame.ImGuiNet" />
+</a>
