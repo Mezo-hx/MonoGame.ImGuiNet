@@ -1,28 +1,29 @@
-<img src="Images/ReadMeBanner.png" alt="Monogame.ImGuiNet_Logo" width="100%">
-
 # MonoGame.ImGuiNet
 
-MonoGame.ImGuiNet is a superset of ImGuiNet with additional Components (gonna release the components soon) designed for MonoGame.
-> Full credit goes to ImGuiNet.
+![Monogame.ImGuiNet Logo](Images/ReadMeBanner.png)
 
-# Getting Started
+**MonoGame.ImGuiNet** is a feature-rich extension of ImGuiNet, enhanced with a set of additional components designed exclusively for MonoGame. We give full credit to the creators of ImGuiNet for their excellent work.
 
-> Installation: https://github.com/Mezo-hx/MonoGame.ImGuiNet/issues/1
+## Getting Started
 
-> Wiki: https://github.com/Mezo-hx/MonoGame.ImGuiNet/wiki
+- **Installation**: Detailed installation instructions can be found in [this issue](https://github.com/Mezo-hx/MonoGame.ImGuiNet/issues/1).
 
+- **Wiki**: Explore the [Wiki](https://github.com/Mezo-hx/MonoGame.ImGuiNet/wiki) for documentation and guides to get started.
 
-# Notable Mentions
+## Notable Mentions
 
-[Dovker](https://github.com/dovker) - For the original [Monogame.ImGui](https://github.com/dovker/Monogame.ImGui)
+We would like to acknowledge and thank [Dovker](https://github.com/dovker) for the inspiration provided by their original Monogame.imgui project. Their work served as a foundation for our efforts, as the original project was unmaintained.
 
 # Changelog
 
-Update 0.1:
-  - Changed `BeforeLayout` and `AfterLayout` to `BeginLayout` and `EndLayout`
-  - Fixed the lag issue when holding Shift or CTRL on the ImGui Window
+**Update 0.1:**
+- Changed `BeforeLayout` and `AfterLayout` to `BeginLayout` and `EndLayout`
+- Fixed the lag issue when holding Shift or CTRL on the ImGui Window
 
 # Contributors
-<a href="https://github.com/Mezo-hx/MonoGame.ImGuiNet/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Mezo-hx/MonoGame.ImGuiNet" />
-</a>
+
+[![Contributors](https://contrib.rocks/image?repo=Mezo-hx/MonoGame.ImGuiNet)](https://github.com/Mezo-hx/MonoGame.ImGuiNet/graphs/contributors)
+
+---
+
+**Feel free to contribute, report issues, or provide feedback! We appreciate your support in making MonoGame.ImGuiNet even better.**
