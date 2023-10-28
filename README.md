@@ -2,7 +2,7 @@
 
 ![Monogame.ImGuiNet Logo](Images/ReadMeBanner.png)
 
-**MonoGame.ImGuiNet** is a feature-rich extension of ImGuiNet, enhanced with a set of additional components designed exclusively for MonoGame. We give full credit to the creators of ImGuiNet for their excellent work.
+**MonoGame.ImGuiNet** is a feature-rich extension of ImGuiNet, enhanced with a set of additional components designed exclusively for MonoGame (Which should work for XNA/FNA as well!). We give full credit to the creators of ImGuiNet for their excellent work.
 
 ## Getting Started
 
