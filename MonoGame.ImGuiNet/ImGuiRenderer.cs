@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using ImGuiNET;
+using System.Threading;
 
 namespace MonoGame.ImGuiNet;
 
@@ -17,7 +18,7 @@ public class ImGuiRenderer
 
     private BasicEffect _effect;
     private RasterizerState _rasterizerState;
-
+    
     private byte[] _vertexData;
     private VertexBuffer _vertexBuffer;
     private int _vertexBufferSize;
@@ -114,7 +115,7 @@ public class ImGuiRenderer
     /// <summary>
     /// Sets up ImGui for a new frame, should be called at frame start
     /// </summary>
-    public virtual void BeforeLayout(GameTime gameTime)
+    public virtual void BeginLayout(GameTime gameTime)
     {
         ImGui.GetIO().DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -126,7 +127,7 @@ public class ImGuiRenderer
     /// <summary>
     /// Asks ImGui for the generated geometry data and sends it to the graphics pipeline, should be called after the UI is drawn using ImGui.** calls
     /// </summary>
-    public virtual void AfterLayout()
+    public virtual void EndLayout()
     {
         ImGui.Render();
 
@@ -193,6 +194,7 @@ public class ImGuiRenderer
 
         var mouse = Mouse.GetState();
         var keyboard = Keyboard.GetState();
+
         io.AddMousePosEvent(mouse.X, mouse.Y);
         io.AddMouseButtonEvent(0, mouse.LeftButton == ButtonState.Pressed);
         io.AddMouseButtonEvent(1, mouse.RightButton == ButtonState.Pressed);
@@ -259,9 +261,9 @@ public class ImGuiRenderer
             >= Keys.F1 and <= Keys.F12 => ImGuiKey.F1 + (key - Keys.F1),
             Keys.NumLock => ImGuiKey.NumLock,
             Keys.Scroll => ImGuiKey.ScrollLock,
-            Keys.LeftShift or Keys.RightShift => ImGuiKey.ModShift,
-            Keys.LeftControl or Keys.RightControl => ImGuiKey.ModCtrl,
-            Keys.LeftAlt or Keys.RightAlt => ImGuiKey.ModAlt,
+            Keys.LeftShift => ImGuiKey.ModShift,
+            Keys.LeftControl => ImGuiKey.ModCtrl,
+            Keys.LeftAlt => ImGuiKey.ModAlt,
             Keys.OemSemicolon => ImGuiKey.Semicolon,
             Keys.OemPlus => ImGuiKey.Equal,
             Keys.OemComma => ImGuiKey.Comma,

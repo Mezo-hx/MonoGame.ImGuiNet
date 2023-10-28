@@ -287,25 +287,22 @@
   },
   "packageFolders": {
     "C:\\Users\\Mezo\\.nuget\\packages\\": {},
-    "C:\\Users\\Mezo\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+      "projectUniqueName": "C:\\Users\\Mezo\\Downloads\\MonoGame.ImGuiNet-main\\Monogame.ImGuiNet.csproj",
       "projectName": "MonoGame.ImGuiNet",
-      "projectPath": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+      "projectPath": "C:\\Users\\Mezo\\Downloads\\MonoGame.ImGuiNet-main\\Monogame.ImGuiNet.csproj",
       "packagesPath": "C:\\Users\\Mezo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet\\obj\\",
+      "outputPath": "C:\\Users\\Mezo\\Downloads\\MonoGame.ImGuiNet-main\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Users\\Mezo\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\Mezo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Users\\Mezo\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -314,8 +311,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\Users\\Mezo\\Documents\\GitHub\\MonoGame.ImGuiNet": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -358,26 +353,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.18, 6.0.18]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.18, 6.0.18]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.18, 6.0.18]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

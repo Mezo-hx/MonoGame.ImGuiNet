@@ -1,0 +1,12 @@
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\bin\Debug\net6.0\Monogame.ImGuiNet.deps.json
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\bin\Debug\net6.0\Monogame.ImGuiNet.dll
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\bin\Debug\net6.0\Monogame.ImGuiNet.pdb
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.csproj.AssemblyReference.cache
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.AssemblyInfoInputs.cache
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.AssemblyInfo.cs
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.csproj.CoreCompileInputs.cache
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.dll
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\refint\Monogame.ImGuiNet.dll
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\Monogame.ImGuiNet.pdb
+C:\Users\Mezo\Downloads\MonoGame.ImGuiNet-main\obj\Debug\net6.0\ref\Monogame.ImGuiNet.dll
