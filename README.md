@@ -20,6 +20,16 @@ We would like to acknowledge and thank [Dovker](https://github.com/dovker) for t
 - Changed `BeforeLayout` and `AfterLayout` to `BeginLayout` and `EndLayout`
 - Fixed the lag issue when holding Shift or CTRL on the ImGui Window
 
+# Roadmap
+
+- **Version 1.0** (Future Release)
+  - Live Debugging Tools: Add an easy to use Live Debugging Tool or Profiler.
+  - . . .
+
+> Please note, that we will not be making any promises! so if we didn't add what will be said in our Roadmap, it's either still being worked on, or we were unable to do it!
+
+---
+
 # Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=Mezo-hx/MonoGame.ImGuiNet)](https://github.com/Mezo-hx/MonoGame.ImGuiNet/graphs/contributors)
