@@ -40,18 +40,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../NugetpkgIcon.png" Pack="true" PackagePath=""/>
-        <None Include="../README.MD" Pack="true" PackagePath=""/>
+        <None Include="../NugetpkgIcon.png" Pack="true" PackagePath="" />
+        <None Include="../README.MD" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="ImGui.NET" Version="1.90.0.1"/>
-        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303"/>
-        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303"/>
+        <PackageReference Include="ImGui.NET" Version="1.90.1.1" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     </ItemGroup>
 
     <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
-        <Message Text="Restoring dotnet tools" Importance="High"/>
-        <Exec Command="dotnet tool restore"/>
+        <Message Text="Restoring dotnet tools" Importance="High" />
+        <Exec Command="dotnet tool restore" />
     </Target>
 </Project>
