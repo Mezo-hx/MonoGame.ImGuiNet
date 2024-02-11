@@ -164,7 +164,20 @@ namespace Monogame.ImGuiNetFileBrowser
            };
         }
 
+        public Vector4 GetFileTypeColor(string extension)
+        {
+            if (FileTypeColorMap.ExtensionToColor.TryGetValue(extension, out var color))
+            {
+                return color;
+            }
 
+            return new System.Numerics.Vector4(0.7f, 0.7f, 0.7f, 1.0f);
+        }
+
+        public void SetTypeColor(string extension, float r, float g, float b, float a)
+        {
+            FileTypeColorMap.ExtensionToColor[extension] = new System.Numerics.Vector4(r, g, b, a);
+        }
 
         public imFileBrowser(ImGuiFileBrowserFlags flags = 0)
         {
