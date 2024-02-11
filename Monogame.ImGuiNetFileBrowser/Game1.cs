@@ -1,10 +1,11 @@
-﻿using ImGuiNET;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Monogame.ImGuiNetFileBrowser;
-using MonoGame.ImGuiNet;
 using System.Linq;
+using ImGuiNET;
+using FileBrowser;
+using MonoGame.ImGuiNet;
+using System.Diagnostics;
 
 namespace Monogame.ImGuiNetFileBrowser
 {
@@ -36,12 +37,12 @@ namespace Monogame.ImGuiNetFileBrowser
             fileBrowser = new imFileBrowser(0);
             fileBrowser.SetTitle("File Browser");
             fileBrowser.SetPwd(".");
-            fileBrowser.SetTypeFilters(new string[] { "*.*" }.ToList<string>());
-            // Not implemented yet
+            fileBrowser.SetTypeFilters(new string[] { "*.png", "*.bmp", "*.*" }.ToList<string>());
+            // Not yet implemented
             //fileBrowser.SetOkButtonLabel("Select");
             //fileBrowser.SetCancelButtonLabel("Cancel");
             fileBrowser.SetWindowPos(0, 300);
-            fileBrowser.Open();
+
             base.Initialize();
         }
 
@@ -62,13 +63,41 @@ namespace Monogame.ImGuiNetFileBrowser
             base.Update(gameTime);
         }
 
+        private void DrawImGuiMenuBar()
+        {
+            if (ImGui.BeginMainMenuBar())
+            {
+                if (ImGui.BeginMenu("File"))
+                {
+                    if (ImGui.MenuItem("Open", "Ctrl+O")) { fileBrowser.Open(); }
+                    ImGui.EndMenu();
+                }
+                ImGui.EndMainMenuBar();
+            }
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             GuiRenderer.BeginLayout(gameTime);
+
+            DrawImGuiMenuBar();
+
             fileBrowser.Display();
-            ImGui.End();
+
+            if (fileBrowser.HasSelected())
+            {
+                foreach (var file in fileBrowser.GetSelected())
+                {
+                    Debug.WriteLine(file);
+                }
+            }
+
+            if (fileBrowser.HasCancelled())
+            {
+                Debug.WriteLine("Cancelled");
+            }
 
             GuiRenderer.EndLayout();
             base.Draw(gameTime);

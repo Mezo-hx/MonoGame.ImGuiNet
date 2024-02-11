@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using ImGuiNET;
+using System.Numerics;
 
 namespace Monogame.ImGuiNetFileBrowser
 {
@@ -53,6 +54,8 @@ namespace Monogame.ImGuiNetFileBrowser
         public int Height;
         public int PosX;
         public int PosY;
+        public Vector4 folderColor = new Vector4(1.0f, 1.0f, 0.0f, 1.0f); // Yellow color for folders
+        public Vector4 fileColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f); // White color for files
 
         public imFileBrowser(ImGuiFileBrowserFlags flags = 0)
         {
@@ -87,6 +90,16 @@ namespace Monogame.ImGuiNetFileBrowser
         {
             Width = width;
             Height = height;
+        }
+
+        public void SetFolderColor(float r, float g, float b, float a)
+        {
+            folderColor = new Vector4(r, g, b, a);
+        }
+
+        public void SetFileColor(float r, float g, float b, float a)
+        {
+            fileColor = new Vector4(r, g, b, a);
         }
 
         public void SetTitle(string title)
@@ -174,7 +187,9 @@ namespace Monogame.ImGuiNetFileBrowser
             {
                 ImGui.OpenPopup(OpenLabel);
             }
+
             IsOpened_ = false;
+            CloseFlag = false;
 
             if (OpenFlag && (Flags & ImGuiFileBrowserFlags.NoModal) != 0)
             {
@@ -348,6 +363,7 @@ namespace Monogame.ImGuiNetFileBrowser
                 for (int rscIndex = 0; rscIndex < FileRecords.Count; ++rscIndex)
                 {
                     var rsc = FileRecords[rscIndex];
+
                     if (!rsc.IsDir && shouldHideRegularFiles)
                     {
                         continue;
@@ -360,6 +376,12 @@ namespace Monogame.ImGuiNetFileBrowser
                     {
                         continue;
                     }
+
+                    ImGui.PushID(rsc.Name);
+
+                    var color = rsc.IsDir ? folderColor : fileColor;
+                    ImGui.PushStyleColor(ImGuiCol.Text, color);
+
                     bool selected = SelectedFilenames.Contains(rsc.Name);
                     if (ImGui.Selectable(rsc.ShowName, selected, ImGuiSelectableFlags.DontClosePopups))
                     {
@@ -439,7 +461,11 @@ namespace Monogame.ImGuiNetFileBrowser
                             ImGui.CloseCurrentPopup();
                         }
                     }
+
+                    ImGui.PopStyleColor(); // Revert to the original text color
+                    ImGui.PopID();
                 }
+
 
                 ImGui.EndChild();
             }
@@ -500,6 +526,7 @@ namespace Monogame.ImGuiNetFileBrowser
             bool shouldExit = ImGui.Button("cancel") || CloseFlag || ((Flags & ImGuiFileBrowserFlags.CloseOnEsc) != 0 && ImGui.IsWindowFocused(ImGuiFocusedFlags.RootAndChildWindows) && ImGui.IsKeyPressed(ImGuiKey.Escape));
             if (shouldExit)
             {
+                CloseFlag = true;
                 ImGui.CloseCurrentPopup();
             }
 
@@ -542,6 +569,28 @@ namespace Monogame.ImGuiNetFileBrowser
             SelectedFilenames.Clear();
         }
 
+        public bool HasSelected()
+        {
+            return Ok;
+        }
+
+        public int GetSelectCount()
+        {
+
+            return SelectedFilenames.Count;
+        }
+
+        public List<string> GetSelected()
+        {
+            Ok = false;
+            return SelectedFilenames.ToList();
+        }
+
+        public bool HasCancelled()
+        {
+            return CloseFlag;
+        }
+
         private void UpdateFileRecords()
         {
             FileRecords = new List<FileRecord>();
@@ -565,7 +614,12 @@ namespace Monogame.ImGuiNetFileBrowser
                 var files = Directory.GetFiles(Pwd);
                 foreach (var file in files)
                 {
-                    FileRecords.Add(new FileRecord { IsDir = false, Name = Path.GetFileName(file), ShowName = Path.GetFileName(file), Extension = Path.GetExtension(file) });
+                    var extension = Path.GetExtension(file).ToLowerInvariant(); // Normalize extension
+                    if (!IsExtensionMatched(extension))
+                    {
+                        continue; // This line might be skipping files unintentionally. Check your conditions.
+                    }
+                    FileRecords.Add(new FileRecord { IsDir = false, Name = Path.GetFileName(file), ShowName = Path.GetFileName(file), Extension = extension });
                 }
             }
             catch (Exception e)
@@ -593,16 +647,41 @@ namespace Monogame.ImGuiNetFileBrowser
 
         private bool IsExtensionMatched(string extension)
         {
+            // Check if no filters are set, should not happen as there should at least be one filter.
             if (TypeFilters.Count == 0)
             {
                 return true;
             }
-            if (string.IsNullOrEmpty(extension))
+
+            // If the special case "*.*" is selected, allow all files.
+            string currentFilter = TypeFilters[(int)TypeFilterIndex];
+            if (currentFilter == "*.*")
             {
-                return HasAllFilter;
+                return true;
             }
-            return TypeFilters.Contains(extension);
+
+            // Normalize the extension to ensure consistent comparison.
+            extension = extension?.ToLowerInvariant();
+
+            // Check if the current filter is a wildcard filter like "*.txt"
+            if (currentFilter.StartsWith("*"))
+            {
+                var filterExt = currentFilter.Substring(1).ToLowerInvariant(); // Gets the extension part, e.g., ".txt" from "*.txt"
+                if (!string.IsNullOrEmpty(extension) && extension.EndsWith(filterExt))
+                {
+                    return true;
+                }
+            }
+            else if (currentFilter == extension)
+            {
+                // The current filter matches the file extension exactly.
+                return true;
+            }
+
+            // If none of the above conditions are met, the file does not match the currently selected filter.
+            return false;
         }
+
 
         // Simplify and ensure cross-platform drive selection
         private static uint GetDrivesBitMask()
