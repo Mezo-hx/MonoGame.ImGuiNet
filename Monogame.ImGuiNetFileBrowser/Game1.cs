@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Linq;
 using ImGuiNET;
-using FileBrowser;
+using Monogame.ImGuiNetFileBrowser;
 using MonoGame.ImGuiNet;
 using System.Diagnostics;
 
