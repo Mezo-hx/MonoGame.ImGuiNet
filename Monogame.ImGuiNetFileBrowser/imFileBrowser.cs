@@ -1,5 +1,4 @@
-﻿using ImGuiNET;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using ImGuiNET;
 
 namespace Monogame.ImGuiNetFileBrowser
 {
@@ -69,7 +69,7 @@ namespace Monogame.ImGuiNetFileBrowser
             RangeSelectionStart = 0;
             InputNameBuf = new string('\0', INPUT_NAME_BUF_SIZE);
             Title = "file browser";
-            Pwd = Directory.GetCurrentDirectory();
+            Pwd = Path.GetFullPath(Directory.GetCurrentDirectory());
             TypeFilters = new List<string>();
             TypeFilterIndex = 0;
             HasAllFilter = false;
@@ -120,8 +120,23 @@ namespace Monogame.ImGuiNetFileBrowser
 
         public void SetPwd(string pwd)
         {
-            Pwd = pwd;
-            UpdateFileRecords();
+            try
+            {
+                var fullPath = Path.GetFullPath(pwd);
+                if (Directory.Exists(fullPath))
+                {
+                    Pwd = fullPath;
+                    UpdateFileRecords();
+                }
+                else
+                {
+                    StatusStr = "Directory does not exist: " + pwd;
+                }
+            }
+            catch (Exception e)
+            {
+                StatusStr = "Error setting directory: " + e.Message;
+            }
         }
 
         public void SetTypeFilters(List<string> typeFilters)
@@ -141,284 +156,17 @@ namespace Monogame.ImGuiNetFileBrowser
             InputNameBuf = input;
         }
 
+        /*
         public void SetOkButtonLabel(string label)
         {
-            OpenLabel = label;
+            //openLabel = label;
         }
 
         public void SetCancelButtonLabel(string label)
         {
             OpenNewDirLabel = label;
         }
-
-        public void DisplayClean()
-        {
-            ImGui.PushID(GetHashCode());
-            if (OpenFlag)
-            {
-                ImGui.OpenPopup(OpenLabel);
-            }
-            IsOpened_ = false;
-
-            if (OpenFlag && (Flags & ImGuiFileBrowserFlags.NoModal) != 0)
-            {
-                if (PosIsSet)
-                {
-                    ImGui.SetNextWindowPos(new System.Numerics.Vector2(PosX, PosY));
-                }
-                ImGui.SetNextWindowSize(new System.Numerics.Vector2(Width, Height));
-            }
-            else
-            {
-                if (PosIsSet)
-                {
-                    ImGui.SetNextWindowPos(new System.Numerics.Vector2(PosX, PosY), ImGuiCond.FirstUseEver);
-                }
-                ImGui.SetNextWindowSize(new System.Numerics.Vector2(Width, Height), ImGuiCond.FirstUseEver);
-            }
-            if ((Flags & ImGuiFileBrowserFlags.NoModal) != 0)
-            {
-                if (!ImGui.BeginPopup(OpenLabel))
-                {
-                    return;
-                }
-            }
-            else
-            {
-                if (!ImGui.BeginPopupModal(OpenLabel, ref IsOpened_, (Flags & ImGuiFileBrowserFlags.NoTitleBar) != 0 ? ImGuiWindowFlags.NoTitleBar : 0))
-                {
-                    return;
-                }
-            }
-            IsOpened_ = true;
-
-            ImGui.PushItemWidth(4 * ImGui.GetFontSize());
-            if (ImGui.BeginCombo("##select_drive", Pwd[0] + ":"))
-            {
-                for (int i = 0; i < 26; ++i)
-                {
-                    if ((Drives & (1 << i)) == 0)
-                    {
-                        continue;
-                    }
-                    char driveCh = (char)('A' + i);
-                    string selectableStr = driveCh + ":";
-                    bool selected = Pwd[0] == driveCh;
-                    if (ImGui.Selectable(selectableStr, selected) && !selected)
-                    {
-                        string newPwd = driveCh + ":\\";
-                        SetPwd(newPwd);
-                    }
-                }
-                ImGui.EndCombo();
-            }
-            ImGui.PopItemWidth();
-
-            int secIdx = 0, newPwdLastSecIdx = -1;
-            foreach (var sec in Pwd)
-            {
-                if (secIdx == 1)
-                {
-                    ++secIdx;
-                    continue;
-                }
-                ImGui.PushID(secIdx);
-                if (secIdx > 0)
-                {
-                    ImGui.SameLine();
-                }
-                if (ImGui.SmallButton(sec.ToString()))
-                {
-                    newPwdLastSecIdx = secIdx;
-                }
-                ImGui.PopID();
-                ++secIdx;
-            }
-            if (newPwdLastSecIdx >= 0)
-            {
-                int i = 0;
-                string newPwd = "";
-                foreach (var sec in Pwd)
-                {
-                    if (i++ > newPwdLastSecIdx)
-                    {
-                        break;
-                    }
-                    newPwd += sec;
-                }
-                if (newPwdLastSecIdx == 0)
-                {
-                    newPwd += "\\";
-                }
-                SetPwd(newPwd);
-            }
-            ImGui.SameLine();
-            if (ImGui.SmallButton("*"))
-            {
-                UpdateFileRecords();
-                HashSet<string> newSelectedFilenames = new HashSet<string>();
-                foreach (var name in SelectedFilenames)
-                {
-                    var it = FileRecords.FindIndex(record => name == record.Name);
-                    if (it != -1)
-                    {
-                        newSelectedFilenames.Add(name);
-                    }
-                }
-                if (!string.IsNullOrEmpty(InputNameBuf))
-                {
-                    newSelectedFilenames.Add(InputNameBuf);
-                }
-            }
-            bool focusOnInputText = false;
-            if (!string.IsNullOrEmpty(NewDirNameBuf))
-            {
-                ImGui.SameLine();
-                if (ImGui.SmallButton("+"))
-                {
-                    ImGui.OpenPopup(OpenNewDirLabel);
-                    NewDirNameBuf = "";
-                }
-                if (ImGui.BeginPopup(OpenNewDirLabel))
-                {
-                    ImGui.InputText("name", ref NewDirNameBuf, INPUT_NAME_BUF_SIZE);
-                    focusOnInputText |= ImGui.IsItemFocused();
-                    ImGui.SameLine();
-                    if (ImGui.Button("ok") && !string.IsNullOrEmpty(NewDirNameBuf))
-                    {
-                        ImGui.CloseCurrentPopup();
-                        if (Directory.CreateDirectory(Path.Combine(Pwd, NewDirNameBuf)) != null)
-                        {
-                            UpdateFileRecords();
-                        }
-                        else
-                        {
-                            StatusStr = "failed to create " + NewDirNameBuf;
-                        }
-                    }
-                    ImGui.EndPopup();
-                }
-            }
-
-            float reserveHeight = ImGui.GetFrameHeightWithSpacing();
-            if ((Flags & ImGuiFileBrowserFlags.SelectDirectory) == 0 && (Flags & ImGuiFileBrowserFlags.EnterNewFilename) != 0)
-            {
-                reserveHeight += ImGui.GetFrameHeightWithSpacing();
-            }
-            ImGui.BeginChild("ch", new System.Numerics.Vector2(0, -reserveHeight), ImGuiChildFlags.Border, (Flags & ImGuiFileBrowserFlags.NoModal) != 0 ? ImGuiWindowFlags.AlwaysHorizontalScrollbar : 0);
-            foreach (var rsc in FileRecords)
-            {
-                if (!rsc.IsDir && (Flags & ImGuiFileBrowserFlags.HideRegularFiles) != 0)
-                {
-                    continue;
-                }
-                if (!rsc.IsDir && !IsExtensionMatched(rsc.Extension))
-                {
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(rsc.Name) && rsc.Name[0] == '$')
-                {
-                    continue;
-                }
-                bool selected = SelectedFilenames.Contains(rsc.Name);
-                if (ImGui.Selectable(rsc.ShowName, selected, ImGuiSelectableFlags.DontClosePopups))
-                {
-                    bool wantDir = (Flags & ImGuiFileBrowserFlags.SelectDirectory) != 0;
-                    bool canSelect = rsc.Name != ".." && rsc.IsDir == wantDir;
-                    bool rangeSelect = canSelect && ImGui.GetIO().KeyShift && RangeSelectionStart < FileRecords.Count && (Flags & ImGuiFileBrowserFlags.MultipleSelection) != 0 && ImGui.IsWindowFocused(ImGuiFocusedFlags.RootAndChildWindows);
-                    bool multiSelect = !rangeSelect && ImGui.GetIO().KeyCtrl && (Flags & ImGuiFileBrowserFlags.MultipleSelection) != 0 && ImGui.IsWindowFocused(ImGuiFocusedFlags.RootAndChildWindows);
-                    if (rangeSelect)
-                    {
-                        uint first = Math.Min(RangeSelectionStart, (uint)FileRecords.IndexOf(rsc));
-                        uint last = Math.Max(RangeSelectionStart, (uint)FileRecords.IndexOf(rsc));
-                        SelectedFilenames.Clear();
-                        for (uint i = first; i <= last; ++i)
-                        {
-                            if (FileRecords[(int)i].IsDir != wantDir)
-                            {
-                                continue;
-                            }
-                            if (!wantDir && !IsExtensionMatched(FileRecords[(int)i].Extension))
-                            {
-                                continue;
-                            }
-                            SelectedFilenames.Add(FileRecords[(int)i].Name);
-                        }
-                    }
-                    else if (selected)
-                    {
-                        if (!multiSelect)
-                        {
-                            SelectedFilenames = new HashSet<string> { rsc.Name };
-                            RangeSelectionStart = (uint)FileRecords.IndexOf(rsc);
-                        }
-                        else
-                        {
-                            SelectedFilenames.Remove(rsc.Name);
-                        }
-                        InputNameBuf = "";
-                    }
-                    else if (canSelect)
-                    {
-                        if (multiSelect)
-                        {
-                            SelectedFilenames.Add(rsc.Name);
-                        }
-                        else
-                        {
-                            SelectedFilenames = new HashSet<string> { rsc.Name };
-                        }
-                        if ((Flags & ImGuiFileBrowserFlags.SelectDirectory) == 0)
-                        {
-                            InputNameBuf = rsc.Name;
-                        }
-                        RangeSelectionStart = (uint)FileRecords.IndexOf(rsc);
-                    }
-                    else
-                    {
-                        if (!multiSelect)
-                        {
-                            SelectedFilenames.Clear();
-                        }
-                    }
-                }
-                if (ImGui.IsItemClicked(0) && ImGui.IsMouseDoubleClicked(0))
-                {
-                    if (rsc.IsDir)
-                    {
-                        SetPwd(rsc.Name != ".." ? Path.Combine(Pwd, rsc.Name) : Path.GetDirectoryName(Pwd));
-                    }
-                    else if ((Flags & ImGuiFileBrowserFlags.SelectDirectory) == 0)
-                    {
-                        SelectedFilenames = new HashSet<string> { rsc.Name };
-                        Ok = true;
-                        ImGui.CloseCurrentPopup();
-                    }
-                }
-            }
-            ImGui.EndChild();
-            if ((Flags & ImGuiFileBrowserFlags.SelectDirectory) == 0 && (Flags & ImGuiFileBrowserFlags.EnterNewFilename) != 0)
-            {
-                ImGui.PushID(GetHashCode());
-                if (ImGui.InputText("", ref InputNameBuf, INPUT_NAME_BUF_SIZE) && !string.IsNullOrEmpty(InputNameBuf))
-                {
-                    SelectedFilenames = new HashSet<string> { InputNameBuf };
-                }
-                focusOnInputText |= ImGui.IsItemFocused();
-                ImGui.PopID();
-            }
-            if (!focusOnInputText)
-            {
-                bool selectAll = (Flags & ImGuiFileBrowserFlags.MultipleSelection) != 0 && ImGui.IsKeyPressed(ImGuiKey.A) && (ImGui.IsKeyDown(ImGuiKey.LeftCtrl) || ImGui.IsKeyDown(ImGuiKey.RightCtrl));
-                if (selectAll)
-                {
-                    SelectedFilenames = new HashSet<string>(FileRecords.Where(rsc => rsc.IsDir == ((Flags & ImGuiFileBrowserFlags.SelectDirectory) != 0) && (Flags & ImGuiFileBrowserFlags.HideRegularFiles) == 0 && IsExtensionMatched(rsc.Extension)).Select(rsc => rsc.Name));
-                }
-            }
-            ImGui.EndPopup();
-            ImGui.PopID();
-        }
-
+        */
         public void Display()
         {
             ImGui.PushID(GetHashCode());
@@ -454,18 +202,19 @@ namespace Monogame.ImGuiNetFileBrowser
             }
             else
             {
-                if (!ImGui.BeginPopupModal(OpenLabel, ref IsOpened_, (Flags & ImGuiFileBrowserFlags.NoTitleBar) != 0 ? ImGuiWindowFlags.NoTitleBar : 0))
+                bool open = true;
+                if (!ImGui.BeginPopupModal(OpenLabel, ref open, (Flags & ImGuiFileBrowserFlags.NoTitleBar) != 0 ? ImGuiWindowFlags.NoTitleBar : 0))
                 {
                     return;
                 }
             }
-            
+
             IsOpened_ = true;
-            
+
             char currentDrive = (char)Pwd[0];
             char[] driveStr = { currentDrive, ':', '\0' };
             ImGui.PushItemWidth(4 * ImGui.GetFontSize());
-            
+
             if (ImGui.BeginCombo("##select_drive", driveStr))
             {
                 for (int i = 0; i < 26; ++i)
@@ -535,7 +284,7 @@ namespace Monogame.ImGuiNetFileBrowser
             }
 
             ImGui.SameLine();
-            
+
             if (ImGui.SmallButton("*"))
             {
                 UpdateFileRecords();
@@ -584,7 +333,7 @@ namespace Monogame.ImGuiNetFileBrowser
                 }
             }
 
-            
+
             float reserveHeight = ImGui.GetFrameHeightWithSpacing();
             System.IO.DirectoryInfo newPwd = null; bool setNewPwd = false;
             if ((Flags & ImGuiFileBrowserFlags.SelectDirectory) == 0 && (Flags & ImGuiFileBrowserFlags.EnterNewFilename) != 0)
@@ -694,7 +443,7 @@ namespace Monogame.ImGuiNetFileBrowser
 
                 ImGui.EndChild();
             }
-            
+
             if (setNewPwd)
             {
                 SetPwd(newPwd.FullName);
@@ -780,7 +529,7 @@ namespace Monogame.ImGuiNetFileBrowser
                 ImGui.PopItemWidth();
             }
 
-            if(OpenFlag)
+            if (OpenFlag)
             {
                 OpenFlag = false;
                 CloseFlag = false;
@@ -796,25 +545,34 @@ namespace Monogame.ImGuiNetFileBrowser
         private void UpdateFileRecords()
         {
             FileRecords = new List<FileRecord>();
-            if ((Flags & ImGuiFileBrowserFlags.SelectDirectory) != 0)
-            {
-                FileRecords.Add(new FileRecord { IsDir = true, Name = "..", ShowName = ".." });
-            }
+
+            StatusStr = string.Empty;
+
             try
             {
-                foreach (var dir in Directory.GetDirectories(Pwd))
+                // Safely add ".." for directory navigation
+                if (Flags.HasFlag(ImGuiFileBrowserFlags.SelectDirectory))
+                {
+                    FileRecords.Add(new FileRecord { IsDir = true, Name = "..", ShowName = ".." });
+                }
+
+                var directories = Directory.GetDirectories(Pwd);
+                foreach (var dir in directories)
                 {
                     FileRecords.Add(new FileRecord { IsDir = true, Name = Path.GetFileName(dir), ShowName = Path.GetFileName(dir) });
                 }
-                foreach (var file in Directory.GetFiles(Pwd))
+
+                var files = Directory.GetFiles(Pwd);
+                foreach (var file in files)
                 {
                     FileRecords.Add(new FileRecord { IsDir = false, Name = Path.GetFileName(file), ShowName = Path.GetFileName(file), Extension = Path.GetExtension(file) });
                 }
             }
             catch (Exception e)
             {
-                StatusStr = e.Message;
+                StatusStr = "Error: " + e.Message;
             }
+
             if (TypeFilters.Count > 0)
             {
                 FileRecords = FileRecords.Where(rsc => rsc.IsDir || IsExtensionMatched(rsc.Extension)).ToList();
@@ -846,14 +604,19 @@ namespace Monogame.ImGuiNetFileBrowser
             return TypeFilters.Contains(extension);
         }
 
+        // Simplify and ensure cross-platform drive selection
         private static uint GetDrivesBitMask()
         {
             uint drives = 0;
             foreach (var drive in DriveInfo.GetDrives())
             {
-                if (drive.DriveType == DriveType.Fixed)
+                if (drive.IsReady && (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable))
                 {
-                    drives |= 1u << (drive.Name[0] - 'A');
+                    int index = drive.Name.ToUpperInvariant()[0] - 'A';
+                    if (index >= 0 && index < 26) // Protect against out-of-range drive letters
+                    {
+                        drives |= 1u << index;
+                    }
                 }
             }
             return drives;

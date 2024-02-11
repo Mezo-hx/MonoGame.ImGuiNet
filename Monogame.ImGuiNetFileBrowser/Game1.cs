@@ -33,12 +33,13 @@ namespace Monogame.ImGuiNetFileBrowser
             GuiRenderer = new ImGuiRenderer(this);
             GuiRenderer.RebuildFontAtlas();
 
-            fileBrowser = new imFileBrowser(ImGuiFileBrowserFlags.NoModal);
+            fileBrowser = new imFileBrowser(0);
             fileBrowser.SetTitle("File Browser");
             fileBrowser.SetPwd(".");
             fileBrowser.SetTypeFilters(new string[] { "*.*" }.ToList<string>());
-            fileBrowser.SetOkButtonLabel("Select");
-            fileBrowser.SetCancelButtonLabel("Cancel");
+            // Not implemented yet
+            //fileBrowser.SetOkButtonLabel("Select");
+            //fileBrowser.SetCancelButtonLabel("Cancel");
             fileBrowser.SetWindowPos(0, 300);
             fileBrowser.Open();
             base.Initialize();
