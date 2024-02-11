@@ -54,8 +54,117 @@ namespace Monogame.ImGuiNetFileBrowser
         public int Height;
         public int PosX;
         public int PosY;
-        public Vector4 folderColor = new Vector4(1.0f, 1.0f, 0.0f, 1.0f); // Yellow color for folders
-        public Vector4 fileColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f); // White color for files
+        public Vector4 folderColor = new Vector4(0.7f, 0.7f, 0.7f, 1.0f); // Yellow color for folders
+        public Vector4 fileColor = new Vector4(0.0f, 0.8f, 0.8f, 1.0f); // White color for files
+
+        public class FileTypeColorMap
+        {
+            public static Dictionary<string, System.Numerics.Vector4> ExtensionToColor = new Dictionary<string, System.Numerics.Vector4>
+            {
+                // Document and Text Files
+                { ".txt", new System.Numerics.Vector4(0.75f, 0.75f, 0.75f, 1.0f) }, // Light Grey
+                { ".doc", new System.Numerics.Vector4(0.2f, 0.2f, 1.0f, 1.0f) }, // Dark Blue
+                { ".docx", new System.Numerics.Vector4(0.2f, 0.2f, 1.0f, 1.0f) }, // Dark Blue
+                { ".pdf", new System.Numerics.Vector4(1.0f, 0.3f, 0.3f, 1.0f) }, // Red
+                { ".md", new System.Numerics.Vector4(0.9f, 0.6f, 0.2f, 1.0f) }, // Orange-Brown
+        
+                // Image Files
+                { ".png", new System.Numerics.Vector4(1.0f, 0.5f, 0.0f, 1.0f) }, // Orange
+                { ".jpg", new System.Numerics.Vector4(1.0f, 0.5f, 0.0f, 1.0f) }, // Orange
+                { ".jpeg", new System.Numerics.Vector4(1.0f, 0.5f, 0.0f, 1.0f) }, // Orange
+                { ".gif", new System.Numerics.Vector4(0.6f, 1.0f, 0.6f, 1.0f) }, // Light Green
+                { ".bmp", new System.Numerics.Vector4(0.5f, 0.25f, 0.0f, 1.0f) }, // Brown
+        
+                // Programming and Source Code Files
+                { ".cs", new System.Numerics.Vector4(0.0f, 0.6f, 0.0f, 1.0f) }, // Green
+                { ".cpp", new System.Numerics.Vector4(0.0f, 0.5f, 0.5f, 1.0f) }, // Teal
+                { ".py", new System.Numerics.Vector4(0.4f, 0.6f, 0.8f, 1.0f) }, // Light Blue
+                { ".java", new System.Numerics.Vector4(0.7f, 0.4f, 0.2f, 1.0f) }, // Orange-Brown
+                { ".ts", new System.Numerics.Vector4(0.2f, 0.7f, 0.9f, 1.0f) }, // Sky Blue
+        
+                // Audio and Video Files
+                { ".mp3", new System.Numerics.Vector4(1.0f, 0.0f, 1.0f, 1.0f) }, // Magenta
+                { ".wav", new System.Numerics.Vector4(0.5f, 0.0f, 0.5f, 1.0f) }, // Purple
+                { ".mp4", new System.Numerics.Vector4(0.9f, 0.2f, 0.2f, 1.0f) }, // Reddish
+                { ".avi", new System.Numerics.Vector4(0.2f, 0.2f, 0.9f, 1.0f) }, // Blue
+                        
+                 // Scripting and Configuration Files
+                { ".sh", new System.Numerics.Vector4(0.1f, 0.6f, 0.1f, 1.0f) }, // Dark Green
+                { ".yaml", new System.Numerics.Vector4(0.6f, 0.4f, 0.2f, 1.0f) }, // Dark Orange
+                { ".json", new System.Numerics.Vector4(0.7f, 0.7f, 0.4f, 1.0f) }, // Khaki
+                { ".ini", new System.Numerics.Vector4(0.5f, 0.5f, 0.5f, 1.0f) }, // Grey
+
+                // Data and Database Files
+                { ".sql", new System.Numerics.Vector4(0.8f, 0.8f, 0.0f, 1.0f) }, // Olive Yellow
+                { ".db", new System.Numerics.Vector4(0.6f, 0.6f, 0.3f, 1.0f) }, // Dark Khaki
+                { ".sqlite", new System.Numerics.Vector4(0.6f, 0.3f, 0.3f, 1.0f) }, // Brownish
+
+                // Web and Internet Files
+                { ".html", new System.Numerics.Vector4(0.9f, 0.5f, 0.5f, 1.0f) }, // Soft Red
+                { ".css", new System.Numerics.Vector4(0.5f, 0.5f, 0.9f, 1.0f) }, // Soft Blue
+                { ".js", new System.Numerics.Vector4(0.9f, 0.9f, 0.2f, 1.0f) }, // Yellow
+                { ".php", new System.Numerics.Vector4(0.6f, 0.4f, 0.8f, 1.0f) }, // Light Purple
+
+                // Multimedia and Design
+                { ".psd", new System.Numerics.Vector4(0.0f, 0.5f, 0.5f, 1.0f) }, // Dark Cyan
+                { ".ai", new System.Numerics.Vector4(1.0f, 0.0f, 0.0f, 1.0f) }, // Bright Red
+                { ".fla", new System.Numerics.Vector4(0.9f, 0.6f, 0.2f, 1.0f) }, // Orange-Yellow
+                { ".svg", new System.Numerics.Vector4(0.1f, 0.7f, 0.7f, 1.0f) }, // Turquoise
+
+                // Executable and Binary Files
+                { ".dll", new System.Numerics.Vector4(0.8f, 0.3f, 0.8f, 1.0f) }, // Purple
+                { ".so", new System.Numerics.Vector4(0.5f, 0.2f, 0.2f, 1.0f) }, // Dark Red
+                { ".exe", new System.Numerics.Vector4(0.9f, 0.1f, 0.1f, 1.0f) }, // Bright Red
+                { ".bin", new System.Numerics.Vector4(0.4f, 0.4f, 0.4f, 1.0f) }, // Dark Grey
+
+                // Archive Files
+                { ".zip", new System.Numerics.Vector4(0.5f, 0.5f, 0.0f, 1.0f) }, // Olive
+                { ".rar", new System.Numerics.Vector4(0.5f, 0.5f, 0.0f, 1.0f) }, // Olive
+                { ".7z", new System.Numerics.Vector4(0.5f, 0.5f, 0.0f, 1.0f) }, // Olive
+                { ".tar", new System.Numerics.Vector4(0.4f, 0.3f, 0.2f, 1.0f) }, // Brown
+
+                // Engineering and Design
+                { ".cad", new System.Numerics.Vector4(0.5f, 0.3f, 0.7f, 1.0f) }, // Purple-ish
+                { ".dwg", new System.Numerics.Vector4(0.3f, 0.5f, 0.7f, 1.0f) }, // Blue-ish
+                { ".dxf", new System.Numerics.Vector4(0.4f, 0.4f, 0.7f, 1.0f) }, // Soft Blue
+                { ".stl", new System.Numerics.Vector4(0.8f, 0.3f, 0.5f, 1.0f) }, // Pink-ish
+        
+                // Science and Data Analysis
+                { ".pdb", new System.Numerics.Vector4(0.9f, 0.7f, 0.2f, 1.0f) }, // Gold
+                { ".csv", new System.Numerics.Vector4(0.9f, 0.45f, 0.0f, 1.0f) }, // Dark Orange
+                { ".nc", new System.Numerics.Vector4(0.2f, 0.5f, 0.8f, 1.0f) }, // Light Blue
+                { ".dat", new System.Numerics.Vector4(0.7f, 0.7f, 0.7f, 1.0f) }, // Light Grey
+
+                // Scripting and Markup Languages
+                { ".lua", new System.Numerics.Vector4(0.1f, 0.7f, 0.1f, 1.0f) }, // Green
+                { ".perl", new System.Numerics.Vector4(0.7f, 0.1f, 0.7f, 1.0f) }, // Purple
+                { ".xml", new System.Numerics.Vector4(0.8f, 0.4f, 0.4f, 1.0f) }, // Soft Red
+        
+                // Virtual Machine and Container Files
+                { ".vmdk", new System.Numerics.Vector4(0.6f, 0.4f, 0.6f, 1.0f) }, // Lavender
+                { ".ova", new System.Numerics.Vector4(0.5f, 0.5f, 0.8f, 1.0f) }, // Periwinkle
+                { ".dockerfile", new System.Numerics.Vector4(0.2f, 0.6f, 0.7f, 1.0f) }, // Turquoise
+        
+                // Miscellaneous
+                { ".iso", new System.Numerics.Vector4(0.8f, 0.8f, 0.0f, 1.0f) }, // Yellow
+                { ".torrent", new System.Numerics.Vector4(0.0f, 0.5f, 0.0f, 1.0f) }, // Dark Green
+                { ".vbs", new System.Numerics.Vector4(0.5f, 0.0f, 0.5f, 1.0f) }, // Purple
+        
+                // Development and Build Files
+                { ".makefile", new System.Numerics.Vector4(0.5f, 0.3f, 0.0f, 1.0f) }, // Brown
+                { ".cmake", new System.Numerics.Vector4(0.3f, 0.3f, 0.5f, 1.0f) }, // Slate Blue
+                { ".docker-compose.yml", new System.Numerics.Vector4(0.2f, 0.5f, 0.5f, 1.0f) }, // Dark Cyan
+        
+                // Project Management and Collaboration
+                { ".ppt", new System.Numerics.Vector4(0.8f, 0.2f, 0.2f, 1.0f) }, // Dark Red
+                { ".pptx", new System.Numerics.Vector4(0.8f, 0.2f, 0.2f, 1.0f) }, // Dark Red
+                { ".xls", new System.Numerics.Vector4(0.2f, 0.8f, 0.2f, 1.0f) }, // Dark Green
+                { ".xlsx", new System.Numerics.Vector4(0.2f, 0.8f, 0.2f, 1.0f) }, // Dark Green
+
+           };
+        }
+
+
 
         public imFileBrowser(ImGuiFileBrowserFlags flags = 0)
         {
@@ -380,6 +489,13 @@ namespace Monogame.ImGuiNetFileBrowser
                     ImGui.PushID(rsc.Name);
 
                     var color = rsc.IsDir ? folderColor : fileColor;
+
+                    if (!rsc.IsDir && FileTypeColorMap.ExtensionToColor.TryGetValue(rsc.Extension, out var extColor))
+                    {
+                        color = extColor;
+                    }
+
+
                     ImGui.PushStyleColor(ImGuiCol.Text, color);
 
                     bool selected = SelectedFilenames.Contains(rsc.Name);
@@ -600,10 +716,16 @@ namespace Monogame.ImGuiNetFileBrowser
 
             try
             {
-                // Safely add ".." for directory navigation
-                if (Flags.HasFlag(ImGuiFileBrowserFlags.SelectDirectory))
+                // Check if we're not at the root directory to add the ".." entry
+                if (Directory.GetParent(Pwd) != null)
                 {
-                    FileRecords.Add(new FileRecord { IsDir = true, Name = "..", ShowName = ".." });
+                    FileRecords.Add(new FileRecord
+                    {
+                        IsDir = true, // It's a directory
+                        Name = "..", // The name is ".." indicating to go up
+                        ShowName = "..", // The displayed name is also ".."
+                        Extension = "" // No extension for a directory
+                    });
                 }
 
                 var directories = Directory.GetDirectories(Pwd);
